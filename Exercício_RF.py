@@ -1,3 +1,13 @@
+# Seja G(s)=K/(s+a), excitada por uma senóide de frequência 1,0345 Hz.
+# Em regime estacionário, observou-se que a resposta também era senoidal,
+# mas com magnitude de 6,5dB e uma fase de -17,5 graus em relação à excitação.
+# Nestas condições, desenhe os gráficos de Bode e determine a fase do sistema em graus,
+# na frequência de cruzamento de ganho, com 3 decimais.
+
+# O enunciado traz para a gente que o sistema é de primeira ordem, tem um polo "a".
+# a frequência em Hz é dada, e vale 1.0345. A magnitude (|G|) é de 6.5 dB e a fase (φ)
+# - 17.5 graus.
+
 import numpy as np
 import matplotlib.pyplot as plt
 
