@@ -59,3 +59,29 @@ step(Y_R/s) % Y_R/s dá uma entrada rampa
 title('ramp response')
 xlim([0,20])
 
+%% Exercício 4
+
+%%
+
+syms s t Y
+
+% Função de transferência no domínio de Laplace
+Y = 160/(s*(s+4)*(s+8));
+
+% Transformada inversa para obter y(t)
+y_t = ilaplace(Y, s, t);
+
+% Mostrar expressão de y(t)
+disp('Expressão de y(t):');
+pretty(y_t)
+
+% Avaliar em t = 0.08
+valor = double(subs(y_t, t, 0.08));
+
+fprintf('y(0.08) = %.3f\n', valor);
+
+% Expressão de y(t):
+exp(-8 t) 5 - exp(-4 t) 10 + 5
+
+% y(0.08) = 0.375
+
