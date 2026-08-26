@@ -36,3 +36,26 @@ omega_n = omega_d / sqrt(1 - zeta^2);
 % Exibindo os resultados com 2 casas decimais
 fprintf('Frequência natural não amortecida (omega_n): %.2f rad/s\n', omega_n);
 fprintf('Frequência natural amortecida (omega_d): %.2f rad/s\n', omega_d);
+
+
+%% Exercício - 3
+
+% Constantes do sistema
+Km =12.37;
+Kb =0.038;
+K=0.0388;
+s = tf('s');
+
+T_s = K*Km/(s*(s+0.01+Km*Kb));
+pidcontrol(T_s)
+Y_R = feedback(T_s,1); % fechando a malha
+
+subplot(1,2,1)
+step(Y_R)
+xlim([0,20])
+
+subplot(1,2,2)
+step(Y_R/s) % Y_R/s dá uma entrada rampa
+title('ramp response')
+xlim([0,20])
+
