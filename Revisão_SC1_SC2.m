@@ -85,3 +85,53 @@ exp(-8 t) 5 - exp(-4 t) 10 + 5
 
 % y(0.08) = 0.375
 
+%%
+% Parâmetro do sistema
+a = 10;
+
+% Vetor de valores de K para testar
+K_values = [0 0.1 1 5 10 50 100 1000];
+
+% Inicializar vetor de erros
+ess = zeros(size(K_values));
+
+% Calcular erro estacionário para cada K
+for i = 1:length(K_values)
+    K = K_values(i);
+    G0 = 1 / ( (2*K) * a );   % G(0)
+    ess(i) = 1 / (1 + G0);    % erro estacionário
+end
+
+% Mostrar resultados
+disp('   K        erro estacionario')
+disp([K_values' ess'])
+
+%%
+
+% Processo
+num = 24.6924;
+den = conv([1 3.8], conv([1 1.9],[1 1.9])); % (s+3.8)(s+1.9)^2
+G = tf(num, den);
+
+% Polinômio característico em malha fechada:
+% s^3 + 7.6 s^2 + 18.05 s + (13.718 + 24.6924*K) = 0
+% Para oscilação sustentada, substituímos s = j*omega
+
+% Frequência de oscilação (parte imaginária = 0)
+omega = sqrt(18.05);
+
+% Período da oscilação
+T = 2*pi/omega;
+
+fprintf('Período da oscilação = %.3f s\n', T);
+
+
+% Plotar gráfico
+figure;
+plot(K_values, ess, 'o-','LineWidth',1.5)
+xlabel('K')
+ylabel('Erro estacionário ao degrau')
+title('Erro estacionário vs K')
+grid on
+
+
